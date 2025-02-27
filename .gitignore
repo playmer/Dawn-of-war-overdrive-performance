@@ -2,5 +2,9 @@
 *.VC.db
 *.ipch
 *.tlog
-Release/
-Debug/
+GDI HOOKING DLL/Release/
+GDI HOOKING DLL/Debug/
+Redone/Release/
+Redone/Debug/
+*/Debug/
+Output/

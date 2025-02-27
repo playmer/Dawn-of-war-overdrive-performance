@@ -11,10 +11,9 @@
 #include <SDL3/SDL_vulkan.h>
 #include <vulkan/vulkan.h>
 
-#pragma comment(lib, "User32.lib")
-#pragma comment(lib, "Imagehlp.lib")
-#pragma comment(lib, "d3d9.lib")
-#pragma comment(lib, "vulkan-1.lib")
+//#pragma comment(lib, "User32.lib")
+//#pragma comment(lib, "Imagehlp.lib")
+//#pragma comment(lib, "d3d9.lib")
 
 #ifndef STATUS_SUCCESS
 #define STATUS_SUCCESS ((NTSTATUS)0x00000000L)
@@ -47,20 +46,9 @@ pVkCreateDevice    OriginalVkCreateDevice = nullptr;
 pVkDestroyDevice   OriginalVkDestroyDevice = nullptr;
 pVkQueueSubmit     OriginalVkQueueSubmit = nullptr;
 
-// ------------------------------------------------------------------------
-// Minimal VulkanContext struct
-// ------------------------------------------------------------------------
-struct VulkanContext {
-    VkInstance       instance;
-    VkSurfaceKHR     surface;
-    VkPhysicalDevice physicalDevice;
-    VkDevice         device;
-    VkQueue          graphicsQueue;
-    VkSwapchainKHR   swapchain;
-};
 
 // One global context
-static VulkanContext g_VulkanContext = {
+VulkanContext g_VulkanContext = {
     VK_NULL_HANDLE, // instance
     VK_NULL_HANDLE, // surface
     VK_NULL_HANDLE, // physicalDevice
@@ -178,16 +166,13 @@ BOOL InitializeVulkan() {
     // or (SDL_Window*, size_t*, const char**)
     // either is acceptable. We'll use unsigned int for extensionCount.
     unsigned int extensionCount = 0;
-    if (!SDL_Vulkan_GetInstanceExtensions(g_Window, &extensionCount, nullptr)) {
+    const char* const* extensions_array = SDL_Vulkan_GetInstanceExtensions(&extensionCount);
+    if (nullptr == extensions_array) {
         OutputDebugStringA("[VULKAN] SDL_Vulkan_GetInstanceExtensions (count) failed.\n");
         return FALSE;
     }
 
-    std::vector<const char*> extensions(extensionCount);
-    if (!SDL_Vulkan_GetInstanceExtensions(g_Window, &extensionCount, extensions.data())) {
-        OutputDebugStringA("[VULKAN] SDL_Vulkan_GetInstanceExtensions (names) failed.\n");
-        return FALSE;
-    }
+    std::vector<const char*> extensions(extensions_array, extensions_array + extensionCount);
 
     VkInstanceCreateInfo createInfo = {};
     createInfo.sType = VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO;
@@ -204,7 +189,7 @@ BOOL InitializeVulkan() {
     // SDL_Vulkan_CreateSurface also needs 3 parameters in Vulkan-enabled SDL:
     // (SDL_Window*, VkInstance, VkSurfaceKHR*)
     // If your header has only 2, your SDL library lacks Vulkan support.
-    if (!SDL_Vulkan_CreateSurface(g_Window, g_VulkanContext.instance, &g_VulkanContext.surface)) {
+    if (!SDL_Vulkan_CreateSurface(g_Window, g_VulkanContext.instance, nullptr, &g_VulkanContext.surface)) {
         OutputDebugStringA("[VULKAN] SDL_Vulkan_CreateSurface failed.\n");
         vkDestroyInstance(g_VulkanContext.instance, nullptr);
         g_VulkanContext.instance = VK_NULL_HANDLE;
@@ -286,7 +271,7 @@ void CleanupVulkan() {
 // The SDL thread that calls InitializeVulkan and runs the loop
 // ------------------------------------------------------------------------
 DWORD WINAPI SDLThread(LPVOID lpParam) {
-    if (SDL_Init(SDL_INIT_VIDEO) < 0) {
+    if (!SDL_Init(SDL_INIT_VIDEO)) {
         OutputDebugStringA("[VULKAN] SDL_Init failed.\n");
         return 1;
     }
@@ -457,14 +442,14 @@ void InitializeDGIHooking() {
 // ------------------------------------------------------------------------
 // Basic IAT hooking function (so it fully compiles). Adjust as needed.
 // ------------------------------------------------------------------------
-#include <dbghelp.h>
-#pragma comment(lib, "DbgHelp.lib")
-
-bool HookIATForModule(HMODULE module, const char* targetDll,
-    DGI_IAT_Hook* hooks, size_t count)
-{
-    // Implementation is the same idea as before (ImageDirectoryEntryToData).
-    // For brevity, assume you already have it. You can keep or remove this.
-    // ...
-    return true;
-}
+//#include <dbghelp.h>
+//#pragma comment(lib, "DbgHelp.lib")
+//
+//bool HookIATForModule(HMODULE module, const char* targetDll,
+//    DGI_IAT_Hook* hooks, size_t count)
+//{
+//    // Implementation is the same idea as before (ImageDirectoryEntryToData).
+//    // For brevity, assume you already have it. You can keep or remove this.
+//    // ...
+//    return true;
+//}

@@ -63,10 +63,10 @@
   <PropertyGroup Label="UserMacros" />
   <!-- Output Directories -->
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <OutDir>C:\Users\n\Documents\Output directory\Patcher\</OutDir>
+    <OutDir>$(SolutionDir)\Output\Patcher\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <OutDir>C:\Users\n\Documents\Output directory\Patcher\</OutDir>
+    <OutDir>$(SolutionDir)\Output\Patcher\</OutDir>
   </PropertyGroup>
   <!-- Compile & Link Settings for Debug | Win32 -->
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -75,13 +75,13 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\Libraries\SDL2-2.32.0\include;C:\Users\n\Documents\Project ccai\Redone\Redone</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\SDL3-3.2.4\include;C:\VulkanSDK\1.4.304.1\Include</AdditionalIncludeDirectories>
       <PrecompiledHeaderFile>stdafx.h;pch.h</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;</AdditionalDependencies>
+      <AdditionalDependencies>$(SolutionDir)\SDL3-3.2.4\lib\x86\SDL3.lib;User32.lib;Imagehlp.lib;gdi32.lib;C:\VulkanSDK\1.4.304.1\Lib\vulkan-1.lib;</AdditionalDependencies>
       <AdditionalLibraryDirectories>C:\Libraries\SDL2-2.32.0\lib\x86</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
@@ -94,14 +94,14 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\Libraries\SDL3-3.2.4\include;C:\VulkanSDK\1.4.304.1\Include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\SDL3-3.2.4\include;C:\VulkanSDK\1.4.304.1\Include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>SDL3.lib;User32.lib;Imagehlp.lib;gdi32.lib;vulkan-1.lib;</AdditionalDependencies>
+      <AdditionalDependencies>$(SolutionDir)\SDL3-3.2.4\lib\x86\SDL3.lib;User32.lib;Imagehlp.lib;gdi32.lib;C:\VulkanSDK\1.4.304.1\Lib\vulkan-1.lib;</AdditionalDependencies>
       <AdditionalLibraryDirectories>C:\Libraries\SDL3-3.2.4\lib\x86;C:\VulkanSDK\1.4.304.1\Lib</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>

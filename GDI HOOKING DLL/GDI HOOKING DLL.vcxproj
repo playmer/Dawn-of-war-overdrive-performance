@@ -71,12 +71,12 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <OutDir>C:\Users\n\Documents\Output directory\GDI AND RENDER\</OutDir>
+    <OutDir>$(SolutionDir)\Output\GDI AND RENDER\</OutDir>
     <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);C:\Libraries\SDL3-3.2.4\include;</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);C:\Libraries\SDL3-3.2.4\include;</IncludePath>
-    <OutDir>C:\Users\n\Documents\Output directory\GDI AND RENDER\</OutDir>
+    <OutDir>$(SolutionDir)\Output\GDI AND RENDER\</OutDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -86,13 +86,13 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>C:\Libraries\SDL3-3.2.4\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\SDL3-3.2.4\include;C:\VulkanSDK\1.4.304.1\Include;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows (/SUBSYSTEM:CONSOLE)</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableUAC>false</EnableUAC>
-      <AdditionalDependencies>SDL3.lib</AdditionalDependencies>
+      <AdditionalDependencies>$(SolutionDir)\SDL3-3.2.4\lib\x86\SDL3.lib;User32.lib;Imagehlp.lib;gdi32.lib;C:\VulkanSDK\1.4.304.1\Lib\vulkan-1.lib</AdditionalDependencies>
       <AdditionalLibraryDirectories>C:\Libraries\SDL3-3.2.4\lib</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
@@ -106,7 +106,7 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>C:\Libraries\SDL3-3.2.4\include;C:\Users\n\Documents\Project ccai\Redone\Github source\GDI HOOKING DLL;C:\VulkanSDK\1.4.304.1\Include;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\SDL3-3.2.4\include;C:\VulkanSDK\1.4.304.1\Include;</AdditionalIncludeDirectories>
       <AdditionalOptions>/showIncludes
  %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
@@ -117,7 +117,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableUAC>false</EnableUAC>
       <AdditionalLibraryDirectories>C:\Libraries\SDL3-3.2.4\lib\x86;C:\VulkanSDK\1.4.304.1\Lib</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL3.lib;User32.lib;Imagehlp.lib;gdi32.lib;vulkan-1.lib;</AdditionalDependencies>
+      <AdditionalDependencies>$(SolutionDir)\SDL3-3.2.4\lib\x86\SDL3.lib;User32.lib;Imagehlp.lib;gdi32.lib;C:\VulkanSDK\1.4.304.1\Lib\vulkan-1.lib;</AdditionalDependencies>
     </Link>
     <ProjectReference>
       <LinkLibraryDependencies>false</LinkLibraryDependencies>

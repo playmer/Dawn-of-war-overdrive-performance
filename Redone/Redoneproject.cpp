@@ -1,8 +1,8 @@
 #ifndef PCH_H
 #define PCH_H
 #define _WIN32_WINNT 0x0600
-#define WIN32_LEAN_AND_MEAN
-#define NOMINMAX
+//#define WIN32_LEAN_AND_MEAN
+//#define NOMINMAX
 #define NO_IMAGEHLP
 #include <windows.h>
 #include <DbgHelp.h>

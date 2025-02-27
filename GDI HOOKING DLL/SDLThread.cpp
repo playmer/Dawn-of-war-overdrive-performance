@@ -16,7 +16,6 @@ VkQueue gVkGraphicsQueue = VK_NULL_HANDLE;
 VkSwapchainKHR gVkSwapchain = VK_NULL_HANDLE;
 SDL_Window* g_Window = nullptr;
 ThreadSafeQueue gRenderQueue;
-volatile bool gSDLRunning = true;
 
 extern "C" __declspec(dllexport) DWORD WINAPI SDLThread(LPVOID lpParam) {
     if (SDL_Init(SDL_INIT_VIDEO) != 0) {
@@ -38,7 +37,6 @@ extern "C" __declspec(dllexport) DWORD WINAPI SDLThread(LPVOID lpParam) {
     }
 
     // Use Vulkan context from dllmain.cpp (assuming it’s set globally)
-    extern VulkanContext g_VulkanContext; // From dllmain.cpp
     gVkInstance = g_VulkanContext.instance;
     gVkSurface = g_VulkanContext.surface;
     gVkPhysicalDevice = g_VulkanContext.physicalDevice;
